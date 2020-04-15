@@ -3,10 +3,12 @@ import * as Locations from './locations'
 import { FlyToInterpolator } from 'react-map-gl'
 import Map from './Map'
 import {neighbors} from './neighbors'
+// import {csv} from 'd3'
+
 
 function App() {
-    const [viewState, setViewState] = useState(Locations.salvador);
-    const [libraries, setLibrares] = useState([])
+    const [viewState, setViewState] = useState(Locations.ssa);
+    const [libraries, setLibraries] = useState([])
 
     const handleChangeViewState = ({viewState}) => setViewState(viewState) 
     const handleFlyTo = destination => setViewState({
@@ -15,16 +17,23 @@ function App() {
       transitionDuration: 2000,
       transitionInterpolation: new FlyToInterpolator() 
     })
-    
-    useEffect(() => {
+
+    useEffect(() => {   
       async function fetchData(){
-        await neighbors
-        setLibrares(neighbors)
-      }
+          await neighbors
+          setLibraries(neighbors)
+        }
 
-      fetchData()
+        fetchData()
 
-    }, [])
+      }, [])
+
+    const [radius, setRadius] = useState(15);
+    const handleToggleRadius = () =>
+    setRadius(radius > 0 ? 0 : Math.random() * 35 + 5);
+
+    const [arcsEnabled, setArcsEnabled] = useState(true);
+    const handleToggleArcs = () => setArcsEnabled(!arcsEnabled);
 
     return (
       <div>
@@ -33,9 +42,12 @@ function App() {
           height="100vh" 
           onViewStateChange={handleChangeViewState}
           viewState={viewState} 
-          libraries={libraries} /> 
-
+          libraries={libraries} 
+          radius={radius}  
+          arcsEnabled={arcsEnabled}/> 
       <div>
+        <button onClick={handleToggleRadius}> Radius </button>
+        <button onClick={handleToggleArcs}>Arcs</button>
         {Object.keys(Locations).map(key => (
           <button key={key} onClick={() => handleFlyTo(Locations[key])} >{key}</button>
         ) )}

@@ -38,10 +38,10 @@ export const usa = {
     bearing: 58.7,
   };
 
-  export const salvador = {
+  export const ssa = {
     longitude: -38.5124,
     latitude: -12.9704,
-    zoom: 8,
+    zoom: 4,
     pitch: 5,
     bearing: 30
   }
