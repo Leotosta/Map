@@ -46,8 +46,8 @@ function Map({ width, height, viewState, onViewStateChange, libraries, radius, a
       <ReactMapGL
         width={width}
         height={height}
-        mapboxApiAccessToken={'pk.eyJ1IjoibGVvdG9zdGEiLCJhIjoiY2s4eGRocGQ5MTY1dDNpbnU5cGFrMHd6NCJ9.wfZfuXnW6R0RDQR3OnJfqg'}
-        mapStyle='mapbox://styles/leotosta/ck7z90ani1uf41imo1rjupvu5'
+        mapboxApiAccessToken={TOKEN}
+        mapStyle={STYLE}
         onViewStateChange={onViewStateChange}
         viewState={viewState}
       >
